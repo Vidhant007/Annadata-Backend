@@ -22,6 +22,7 @@ const { DISASTERROUTER } = require('./routes/disasterRouter');
 const { EVENTROUTER } = require('./routes/eventRouter');
 const { HOTSPOTROUTER } = require('./routes/hotspotRouter');
 const { INFOROUTER } = require('./routes/informativeRouter');
+const { REWARDROUTER } = require('./routes/rewardRouter');
 
 
 
@@ -33,6 +34,7 @@ app.use('/api/disaster',DISASTERROUTER);
 app.use('/api/event',EVENTROUTER);
 app.use('/api/hotspot',HOTSPOTROUTER);
 app.use('/api/info',INFOROUTER);
+app.use('/api/reward/',REWARDROUTER);
 
 
 const PORT = process.env.PORT ;

@@ -4,7 +4,7 @@ const rewardSchema = new mongoose.Schema({
     productName:{
         type:String,
     },
-    productImage:{
+    imageUrl:{
         type:String,
     },
     costPoints:{
@@ -13,11 +13,6 @@ const rewardSchema = new mongoose.Schema({
     productDescription:{
         type:String,
     },
-    impact:{
-        type:String,
-    }
-
-
 });
 
 module.exports = mongoose.model("Reward",rewardSchema);

@@ -48,6 +48,7 @@ const createTicket = async (req, res) => {
         category: req.body.category,
         imageUrl: imageUrls.join(", "), // Concatenate filenames into a comma-separated string
         description: req.body.description,
+        quantity: req.body.quantity,
       });
 
       await newTicket.save();

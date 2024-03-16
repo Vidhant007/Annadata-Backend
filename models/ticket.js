@@ -36,6 +36,9 @@ const ticketSchema = new mongoose.Schema({
   feedback: {
     type: String,
   },
+  quantity:{
+    type:Number,
+  }
 });
 
 module.exports = mongoose.model("Ticket", ticketSchema);
