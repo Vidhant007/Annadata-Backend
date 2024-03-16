@@ -46,17 +46,10 @@ const registerDonor = async (req, res) => {
 
     const user = await DONOR.create({ ...tempUser });
 
-    const token = jwt.sign(
-      { userId: user._id, name: user.username, emai: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
 
     res
       .status(StatusCodes.CREATED)
-      .send({ user: { name: user.username }, token });
+      .send(user);
   } catch (error) {
     console.log(error);
     return res
@@ -107,17 +100,10 @@ const registerVolunteer = async (req, res) => {
 
     const user = await VOLUNTEER.create({ ...tempUser });
 
-    const token = jwt.sign(
-      { userId: user._id, name: user.username, emai: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
-
+   
     res
       .status(StatusCodes.CREATED)
-      .send({ user: { name: user.username }, token });
+      .send(user);
   } catch (error) {
     console.log(error);
     return res
@@ -147,15 +133,8 @@ const loginDonor = async (req, res) => {
       return res.status(StatusCodes.BAD_REQUEST).send("Invalid Credentials");
     }
 
-    const token = jwt.sign(
-      { userId: user._id, name: user.username, email: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
 
-    res.status(StatusCodes.OK).json({ user: { name: user.username }, token });
+    res.status(StatusCodes.OK).json(user);
   } catch (error) {
     console.log(error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error logging In !");
@@ -183,15 +162,8 @@ const loginVolunteer = async (req, res) => {
       return res.status(StatusCodes.BAD_REQUEST).send("Invalid Credentials");
     }
 
-    const token = jwt.sign(
-      { userId: user._id, name: user.username, email: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_LIFETIME,
-      }
-    );
 
-    res.status(StatusCodes.OK).json({ user: { name: user.username }, token });
+    res.status(StatusCodes.OK).json(user);
   } catch (error) {
     console.log(error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error logging In !");
