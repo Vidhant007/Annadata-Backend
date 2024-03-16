@@ -11,6 +11,10 @@ const ticketSchema = new mongoose.Schema({
     ref: "Volunteer",
     default: null,
   },
+  address: {
+    type: String,
+    required: true,
+  },
   latitude: {
     type: Number,
     required: true,
@@ -36,10 +40,9 @@ const ticketSchema = new mongoose.Schema({
   feedback: {
     type: String,
   },
-  quantity:{
-    type:Number,
-  }
+  quantity: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("Ticket", ticketSchema);
-

@@ -19,9 +19,12 @@ const Storage = multer.diskStorage({
 
 const upload = multer({
   storage: Storage,
-}).fields([{ name: "images", maxCount: 1 }]);
+}).single("mealImage");
 
 const createTicket = async (req, res) => {
+  console.log(req.body);
+  console.log(req);
+
   upload(req, res, async (err) => {
     if (err) {
       console.log(err);
@@ -31,24 +34,18 @@ const createTicket = async (req, res) => {
     }
 
     try {
-      const images = req.files.images.map((file) => {
-        return {
-          data: file.filename,
-          contentType: file.mimetype,
-        };
-      });
+      const imageUrl = `${process.env.SERVER_URI}/uploads/${req.file?.filename}`;
+      console.log(imageUrl);
 
-      const imageUrls = req.files.images.map(
-        (file) => `${process.env.SERVER_URI}/uploads/${file.filename}`
-      );
       const newTicket = new TICKET({
-        ownerid: req.body.ownerid.trim(),
+        ownerid: req.body.ownerId.trim(),
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        category: req.body.category,
-        imageUrl: imageUrls.join(", "), // Concatenate filenames into a comma-separated string
+        category: req.body.mealName,
+        imageUrl: imageUrl, // Concatenate filenames into a comma-separated string
         description: req.body.description,
-        quantity: req.body.quantity,
+        quantity: req.body.mealQuantity,
+        address: req.body.address,
       });
 
       await newTicket.save();

@@ -7,6 +7,7 @@ const VOLUNTEER = require("../models/volunteer");
 
 const registerDonor = async (req, res) => {
   try {
+    console.log(req.body);
     const { username, phone, email, password } = req.body;
 
     if (!username || !phone || !email || !password) {
@@ -46,10 +47,7 @@ const registerDonor = async (req, res) => {
 
     const user = await DONOR.create({ ...tempUser });
 
-
-    res
-      .status(StatusCodes.CREATED)
-      .send(user);
+    res.status(StatusCodes.CREATED).send(user);
   } catch (error) {
     console.log(error);
     return res
@@ -100,10 +98,7 @@ const registerVolunteer = async (req, res) => {
 
     const user = await VOLUNTEER.create({ ...tempUser });
 
-   
-    res
-      .status(StatusCodes.CREATED)
-      .send(user);
+    res.status(StatusCodes.CREATED).send(user);
   } catch (error) {
     console.log(error);
     return res
@@ -133,7 +128,6 @@ const loginDonor = async (req, res) => {
       return res.status(StatusCodes.BAD_REQUEST).send("Invalid Credentials");
     }
 
-
     res.status(StatusCodes.OK).json(user);
   } catch (error) {
     console.log(error);
@@ -161,7 +155,6 @@ const loginVolunteer = async (req, res) => {
     if (!isPasswordCorrect) {
       return res.status(StatusCodes.BAD_REQUEST).send("Invalid Credentials");
     }
-
 
     res.status(StatusCodes.OK).json(user);
   } catch (error) {
