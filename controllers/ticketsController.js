@@ -73,7 +73,7 @@ const getUserTicket = async (req,res) =>{
     }
 
 
-    const ticket = await TICKET.findOne({ ownerid: id });
+    const ticket = await TICKET.find({ ownerid: id });
 
     if (ticket) {
       return res
