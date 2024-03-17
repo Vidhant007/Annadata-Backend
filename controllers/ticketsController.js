@@ -95,12 +95,8 @@ const getUserTicket = async (req,res) =>{
 const claimTicket = async (req, res) => {
   //also notifies donor by providing notification (through claimerid)
   try {
-    const { id } = req.params;
-    if (!id) {
-      return res.status(StatusCodes.FORBIDDEN).send("Ticket ID not Defined");
-    }
-
-    const { claimerid, claimed } = req.body;
+ 
+    const { id,claimerid, claimed } = req.body;
 
     const claimedTicket = await TICKET.findOneAndUpdate({ _id: id }, req.body, {
       new: true,
