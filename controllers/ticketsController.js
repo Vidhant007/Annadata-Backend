@@ -78,7 +78,7 @@ const getUserTicket = async (req,res) =>{
     if (ticket) {
       return res
         .status(StatusCodes.OK)
-        .send(`Ticket Found: ${ticket}`);
+        .json(ticket);
     } else {
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
