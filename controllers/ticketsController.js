@@ -64,6 +64,34 @@ const createTicket = async (req, res) => {
   });
 };
 
+const getUserTicket = async (req,res) =>{
+  //also notifies donor by providing notification (through claimerid)
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(StatusCodes.FORBIDDEN).send("USER ID not Defined");
+    }
+
+
+    const ticket = await TICKET.findOne({ ownerid: id });
+
+    if (ticket) {
+      return res
+        .status(StatusCodes.OK)
+        .send(`Ticket Found: ${ticket}`);
+    } else {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send("Error Finding Ticket");
+    }
+  } catch (error) {
+    console.error(error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Error creating Finding Ticket" });
+  }
+}
+
 const claimTicket = async (req, res) => {
   //also notifies donor by providing notification (through claimerid)
   try {
@@ -144,4 +172,5 @@ module.exports = {
   CLAIMTICKET: claimTicket,
   GETICKETS: getTickets,
   CLOSETICKET: closeTicket,
+  GETUSERTICKET:getUserTicket,
 };
